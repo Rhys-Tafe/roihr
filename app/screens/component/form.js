@@ -32,24 +32,31 @@ const MyForm = function (props) {
   const [zip, setZip] = useState("");
   const [country, setCountry] = useState("");
   const [userDetails, setUserDetails] = useState(false);
+
   //Validate user details.
-  //Define saveUser as a function.
-  //Contains fetch statement.
-  const err = "";
+  const err1 = "";
+  const err2 = "";
+  const err3 = "";
+  const err4 = "";
+  const err5 = "";
+  const err6 = "";
+  const err7 = "";
+  const err8 = "";
+  const err9 = "";
   const error = err1 + err2 + err3 + err4 + err5 + err6 + err7 + err8 + err9;
   function validateForm() {
     if (id === "") {
       setUserDetails(false);
       //alert("ID cannot be nothing.");
-      err = "ID cannot be nothing.";
+      err1 = "ID cannot be nothing.";
     } else if (id === " ") {
       setUserDetails(false);
       //alert("ID cannot be nothing.");
-      err = "ID cannot be nothing.";
+      err1 = "ID cannot be nothing.";
     } else if (id === "0") {
       setUserDetails(false);
       //alert("ID cannot be 0.");
-      err = "ID cannot be 0.";
+      err1 = "ID cannot be 0.";
     } else {
       setUserDetails(true);
     }
@@ -57,15 +64,15 @@ const MyForm = function (props) {
     if (username === "") {
       setUserDetails(false);
       //alert("Name cannot be nothing.");
-      err = "Name cannot be nothing.";
+      err2 = "Name cannot be nothing.";
     } else if (id === " ") {
       setUserDetails(false);
       //alert("Name cannot be nothing.");
-      err = "Name cannot be nothing.";
+      err2 = "Name cannot be nothing.";
     } else if (id === "0") {
       setUserDetails(false);
       //alert("Name cannot be 0.");
-      err = "Name cannot be 0.";
+      err2 = "Name cannot be 0.";
     } else {
       setUserDetails(true);
     }
@@ -73,15 +80,15 @@ const MyForm = function (props) {
     if (phone === "") {
       setUserDetails(false);
       //alert("Phone cannot be nothing.");
-      err = "Phone cannot be nothing.";
+      err3 = "Phone cannot be nothing.";
     } else if (id === " ") {
       setUserDetails(false);
       //alert("Phone cannot be nothing.");
-      err = "Phone cannot be nothing.";
+      err3 = "Phone cannot be nothing.";
     } else if (id === "0") {
       setUserDetails(false);
       //alert("Phone cannot be 0.");
-      err = "Phone cannot be 0.";
+      err3 = "Phone cannot be 0.";
     } else {
       setUserDetails(true);
     }
@@ -89,15 +96,15 @@ const MyForm = function (props) {
     if (department === "") {
       setUserDetails(false);
       //alert("Department cannot be nothing.");
-      err = "Department cannot be nothing.";
+      err4 = "Department cannot be nothing.";
     } else if (id === " ") {
       setUserDetails(false);
       //alert("Department cannot be nothing.");
-      err = "Department cannot be nothing.";
+      err4 = "Department cannot be nothing.";
     } else if (id === "0") {
       setUserDetails(false);
       //alert("Department cannot be 0.");
-      err = "Department cannot be 0.";
+      err4 = "Department cannot be 0.";
     } else {
       setUserDetails(true);
     }
@@ -105,15 +112,15 @@ const MyForm = function (props) {
     if (street === "") {
       setUserDetails(false);
       //alert("Street cannot be nothing.");
-      err = "Street cannot be nothing.";
+      err5 = "Street cannot be nothing.";
     } else if (id === " ") {
       setUserDetails(false);
       //alert("Street cannot be nothing.");
-      err = "Street cannot be nothing.";
+      err5 = "Street cannot be nothing.";
     } else if (id === "0") {
       setUserDetails(false);
       //alert("Street cannot be 0.");
-      err = "Street cannot be 0.";
+      err5 = "Street cannot be 0.";
     } else {
       setUserDetails(true);
     }
@@ -121,15 +128,15 @@ const MyForm = function (props) {
     if (city === "") {
       setUserDetails(false);
       //alert("City cannot be nothing.");
-      err = "City cannot be nothing.";
+      err6 = "City cannot be nothing.";
     } else if (id === " ") {
       setUserDetails(false);
       //alert("City cannot be nothing.");
-      err = "City cannot be nothing.";
+      err6 = "City cannot be nothing.";
     } else if (id === "0") {
       setUserDetails(false);
       //alert("City cannot be 0.");
-      err = "City cannot be 0.";
+      err6 = "City cannot be 0.";
     } else {
       setUserDetails(true);
     }
@@ -137,15 +144,15 @@ const MyForm = function (props) {
     if (state === "") {
       setUserDetails(false);
       //alert("State cannot be nothing.");
-      err = "State cannot be nothing.";
+      err7 = "State cannot be nothing.";
     } else if (id === " ") {
       setUserDetails(false);
       //alert("State cannot be nothing.");
-      err = "State cannot be nothing.";
+      err7 = "State cannot be nothing.";
     } else if (id === "0") {
       setUserDetails(false);
       //alert("State cannot be 0.");
-      err = "State cannot be 0.";
+      err7 = "State cannot be 0.";
     } else {
       setUserDetails(true);
     }
@@ -153,15 +160,15 @@ const MyForm = function (props) {
     if (zip === "") {
       setUserDetails(false);
       //alert("Postcode cannot be nothing.");
-      err = "Postcode cannot be nothing.";
+      err8 = "Postcode cannot be nothing.";
     } else if (id === " ") {
       setUserDetails(false);
       //alert("Postcode cannot be nothing.");
-      err = "Postcode cannot be nothing.";
+      err8 = "Postcode cannot be nothing.";
     } else if (id === "0") {
       setUserDetails(false);
       //alert("Postcode cannot be 0.");
-      err = "Postcode cannot be 0.";
+      err8 = "Postcode cannot be 0.";
     } else {
       setUserDetails(true);
     }
@@ -169,15 +176,15 @@ const MyForm = function (props) {
     if (country === "") {
       setUserDetails(false);
       //alert("Country cannot be nothing.");
-      err = "Country cannot be nothing.";
+      err9 = "Country cannot be nothing.";
     } else if (id === " ") {
       setUserDetails(false);
       //alert("Country cannot be nothing.");
-      err = "Country cannot be nothing.";
+      err9 = "Country cannot be nothing.";
     } else if (id === "0") {
       setUserDetails(false);
       //alert("Country cannot be 0.");
-      err = "Country cannot be 0.";
+      err9 = "Country cannot be 0.";
     } else {
       setUserDetails(true);
     }
@@ -186,6 +193,8 @@ const MyForm = function (props) {
       console.log(error);
     }
   }
+  //Define saveUser as a function.
+  //Contains fetch statement.
 
   const saveUser = function () {
     fetch("https://api.inverellit.net.au/users/create", {
