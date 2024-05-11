@@ -8,6 +8,8 @@ import {
   Button,
   SafeAreaView,
   ImageBackground,
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import * as React from "react";
 import { router } from "expo-router";
@@ -31,171 +33,186 @@ const MyForm = function (props) {
   const [state, setState] = useState("");
   const [zip, setZip] = useState("");
   const [country, setCountry] = useState("");
-  const [userDetails, setUserDetails] = useState(false);
-
+  const [errors, setErrors] = useState({});
   //Validate user details.
-  const err1 = "";
-  const err2 = "";
-  const err3 = "";
-  const err4 = "";
-  const err5 = "";
-  const err6 = "";
-  const err7 = "";
-  const err8 = "";
-  const err9 = "";
-  const error = err1 + err2 + err3 + err4 + err5 + err6 + err7 + err8 + err9;
-  function validateForm() {
-    if (id === "") {
-      setUserDetails(false);
-      //alert("ID cannot be nothing.");
-      err1 = "ID cannot be nothing.";
+  let userDetails = false;
+
+  const validateForm = () => {
+    let errors = {};
+
+    if (!id) {
+      errors.id = "Id is required";
+      setErrors(errors);
+      userDetails = false;
+      return Object.keys(errors).length === 0;
     } else if (id === " ") {
-      setUserDetails(false);
-      //alert("ID cannot be nothing.");
-      err1 = "ID cannot be nothing.";
+      errors.id = "Id cannot be nothing.";
+      setErrors(errors);
+      userDetails = false;
+      return Object.keys(errors).length === 0;
     } else if (id === "0") {
-      setUserDetails(false);
-      //alert("ID cannot be 0.");
-      err1 = "ID cannot be 0.";
+      errors.id = "Id cannot be 0.";
+      setErrors(errors);
+      userDetails = false;
+      return Object.keys(errors).length === 0;
     } else {
-      setUserDetails(true);
+      userDetails = true;
     }
 
-    if (username === "") {
-      setUserDetails(false);
-      //alert("Name cannot be nothing.");
-      err2 = "Name cannot be nothing.";
-    } else if (id === " ") {
-      setUserDetails(false);
-      //alert("Name cannot be nothing.");
-      err2 = "Name cannot be nothing.";
-    } else if (id === "0") {
-      setUserDetails(false);
-      //alert("Name cannot be 0.");
-      err2 = "Name cannot be 0.";
+    if (!username) {
+      errors.username = "Username is required";
+      setErrors(errors);
+      userDetails = false;
+      return Object.keys(errors).length === 0;
+    } else if (username === " ") {
+      errors.username = "Username cannot be nothing.";
+      setErrors(errors);
+      userDetails = false;
+      return Object.keys(errors).length === 0;
+    } else if (username === "0") {
+      errors.username = "Username cannot be 0.";
+      setErrors(errors);
+      userDetails = false;
+      return Object.keys(errors).length === 0;
     } else {
-      setUserDetails(true);
+      userDetails = true;
     }
 
-    if (phone === "") {
-      setUserDetails(false);
-      //alert("Phone cannot be nothing.");
-      err3 = "Phone cannot be nothing.";
-    } else if (id === " ") {
-      setUserDetails(false);
-      //alert("Phone cannot be nothing.");
-      err3 = "Phone cannot be nothing.";
-    } else if (id === "0") {
-      setUserDetails(false);
-      //alert("Phone cannot be 0.");
-      err3 = "Phone cannot be 0.";
+    if (!phone) {
+      errors.phone = "Phone is required";
+      setErrors(errors);
+      userDetails = false;
+      return Object.keys(errors).length === 0;
+    } else if (phone === " ") {
+      errors.phone = "Phone cannot be nothing.";
+      setErrors(errors);
+      userDetails = false;
+      return Object.keys(errors).length === 0;
+    } else if (phone === "0") {
+      errors.phone = "Phone cannot be 0.";
+      setErrors(errors);
+      userDetails = false;
+      return Object.keys(errors).length === 0;
     } else {
-      setUserDetails(true);
+      userDetails = true;
     }
 
-    if (department === "") {
-      setUserDetails(false);
-      //alert("Department cannot be nothing.");
-      err4 = "Department cannot be nothing.";
-    } else if (id === " ") {
-      setUserDetails(false);
-      //alert("Department cannot be nothing.");
-      err4 = "Department cannot be nothing.";
-    } else if (id === "0") {
-      setUserDetails(false);
-      //alert("Department cannot be 0.");
-      err4 = "Department cannot be 0.";
+    if (!department) {
+      errors.department = "Department is required";
+      setErrors(errors);
+      userDetails = false;
+      return Object.keys(errors).length === 0;
+    } else if (department === " ") {
+      errors.department = "Department cannot be nothing.";
+      setErrors(errors);
+      userDetails = false;
+      return Object.keys(errors).length === 0;
+    } else if (department === "0") {
+      errors.department = "Department cannot be 0.";
+      setErrors(errors);
+      userDetails = false;
+      return Object.keys(errors).length === 0;
     } else {
-      setUserDetails(true);
+      userDetails = true;
     }
 
-    if (street === "") {
-      setUserDetails(false);
-      //alert("Street cannot be nothing.");
-      err5 = "Street cannot be nothing.";
-    } else if (id === " ") {
-      setUserDetails(false);
-      //alert("Street cannot be nothing.");
-      err5 = "Street cannot be nothing.";
-    } else if (id === "0") {
-      setUserDetails(false);
-      //alert("Street cannot be 0.");
-      err5 = "Street cannot be 0.";
+    if (!street) {
+      errors.street = "Street is required";
+      setErrors(errors);
+      userDetails = false;
+      return Object.keys(errors).length === 0;
+    } else if (street === " ") {
+      errors.street = "Street cannot be nothing.";
+      setErrors(errors);
+      userDetails = false;
+      return Object.keys(errors).length === 0;
+    } else if (street === "0") {
+      errors.street = "Street cannot be 0.";
+      setErrors(errors);
+      userDetails = false;
+      return Object.keys(errors).length === 0;
     } else {
-      setUserDetails(true);
+      userDetails = true;
     }
 
-    if (city === "") {
-      setUserDetails(false);
-      //alert("City cannot be nothing.");
-      err6 = "City cannot be nothing.";
-    } else if (id === " ") {
-      setUserDetails(false);
-      //alert("City cannot be nothing.");
-      err6 = "City cannot be nothing.";
-    } else if (id === "0") {
-      setUserDetails(false);
-      //alert("City cannot be 0.");
-      err6 = "City cannot be 0.";
+    if (!city) {
+      errors.city = "City is required";
+      setErrors(errors);
+      userDetails = false;
+      return Object.keys(errors).length === 0;
+    } else if (city === " ") {
+      errors.city = "City cannot be nothing.";
+      setErrors(errors);
+      userDetails = false;
+      return Object.keys(errors).length === 0;
+    } else if (city === "0") {
+      errors.city = "City cannot be 0.";
+      setErrors(errors);
+      userDetails = false;
+      return Object.keys(errors).length === 0;
     } else {
-      setUserDetails(true);
+      userDetails = true;
     }
 
-    if (state === "") {
-      setUserDetails(false);
-      //alert("State cannot be nothing.");
-      err7 = "State cannot be nothing.";
-    } else if (id === " ") {
-      setUserDetails(false);
-      //alert("State cannot be nothing.");
-      err7 = "State cannot be nothing.";
-    } else if (id === "0") {
-      setUserDetails(false);
-      //alert("State cannot be 0.");
-      err7 = "State cannot be 0.";
+    if (!state) {
+      errors.state = "State is required";
+      setErrors(errors);
+      userDetails = false;
+      return Object.keys(errors).length === 0;
+    } else if (state === " ") {
+      errors.state = "State cannot be nothing.";
+      setErrors(errors);
+      userDetails = false;
+      return Object.keys(errors).length === 0;
+    } else if (state === "0") {
+      errors.state = "State cannot be 0.";
+      setErrors(errors);
+      userDetails = false;
+      return Object.keys(errors).length === 0;
     } else {
-      setUserDetails(true);
+      userDetails = true;
     }
 
-    if (zip === "") {
-      setUserDetails(false);
-      //alert("Postcode cannot be nothing.");
-      err8 = "Postcode cannot be nothing.";
-    } else if (id === " ") {
-      setUserDetails(false);
-      //alert("Postcode cannot be nothing.");
-      err8 = "Postcode cannot be nothing.";
-    } else if (id === "0") {
-      setUserDetails(false);
-      //alert("Postcode cannot be 0.");
-      err8 = "Postcode cannot be 0.";
+    if (!zip) {
+      errors.zip = "Zip is required";
+      setErrors(errors);
+      userDetails = false;
+      return Object.keys(errors).length === 0;
+    } else if (zip === " ") {
+      errors.zip = "Zip cannot be nothing.";
+      setErrors(errors);
+      userDetails = false;
+      return Object.keys(errors).length === 0;
+    } else if (zip === "0") {
+      errors.zip = "Zip cannot be 0.";
+      setErrors(errors);
+      userDetails = false;
+      return Object.keys(errors).length === 0;
     } else {
-      setUserDetails(true);
+      userDetails = true;
     }
 
-    if (country === "") {
-      setUserDetails(false);
-      //alert("Country cannot be nothing.");
-      err9 = "Country cannot be nothing.";
-    } else if (id === " ") {
-      setUserDetails(false);
-      //alert("Country cannot be nothing.");
-      err9 = "Country cannot be nothing.";
-    } else if (id === "0") {
-      setUserDetails(false);
-      //alert("Country cannot be 0.");
-      err9 = "Country cannot be 0.";
+    if (!country) {
+      errors.country = "Country is required";
+      setErrors(errors);
+      userDetails = false;
+      return Object.keys(errors).length === 0;
+    } else if (country === " ") {
+      errors.country = "Country cannot be nothing.";
+      setErrors(errors);
+      userDetails = false;
+      return Object.keys(errors).length === 0;
+    } else if (country === "0") {
+      errors.country = "Country cannot be 0.";
+      setErrors(errors);
+      userDetails = false;
+      return Object.keys(errors).length === 0;
     } else {
-      setUserDetails(true);
+      userDetails = true;
     }
-
-    if (setUserDetails === false) {
-      console.log(error);
-    }
-  }
+  };
   //Define saveUser as a function.
   //Contains fetch statement.
-
   const saveUser = function () {
     fetch("https://api.inverellit.net.au/users/create", {
       method: "POST",
@@ -222,9 +239,10 @@ const MyForm = function (props) {
         router.push("/screens/staffdirectory");
       });
   };
+
   function addUser() {
     validateForm();
-    if (userDetails) {
+    if (userDetails === true) {
       saveUser();
     }
   }
@@ -245,50 +263,60 @@ const MyForm = function (props) {
               value={id}
               onChangeText={(text) => setId(text)}
             />
+            {errors.id ? <Text>{errors.id}</Text> : null}
             <TextInput
               placeholder="Enter Name"
               value={username}
               onChangeText={(text) => setName(text)}
             />
+            {errors.username ? <Text>{errors.username}</Text> : null}
             <TextInput
               placeholder="Enter Phone"
               value={phone}
               keyboardType={"numeric"}
               onChangeText={(text) => setPhone(text)}
             />
+            {errors.phone ? <Text>{errors.phone}</Text> : null}
             <TextInput
               placeholder="Enter Department"
               value={department}
               onChangeText={(text) => setDepartment(text)}
             />
+            {errors.department ? <Text>{errors.department}</Text> : null}
             <TextInput
               placeholder="Enter Street"
               value={street}
               onChangeText={(text) => setStreet(text)}
             />
+            {errors.street ? <Text>{errors.street}</Text> : null}
             <TextInput
               placeholder="Enter City"
               value={city}
               onChangeText={(text) => setCity(text)}
             />
+            {errors.city ? <Text>{errors.city}</Text> : null}
             <TextInput
               placeholder="Enter State"
               value={state}
               onChangeText={(text) => setState(text)}
             />
+            {errors.state ? <Text>{errors.state}</Text> : null}
             <TextInput
               placeholder="Enter Postcode"
               value={zip}
               onChangeText={(text) => setZip(text)}
             />
+            {errors.zip ? <Text>{errors.zip}</Text> : null}
             <TextInput
               placeholder="Country"
               value={country}
               onChangeText={(text) => setCountry(text)}
             />
+            {errors.country ? <Text>{errors.country}</Text> : null}
             {/*Footer contains saveUser function and home navigation. */}
           </ImageBackground>
         </SafeAreaView>
+
         <View style={styles_footer.container}>
           <Pressable style={styles_home.button} onPress={() => addUser()}>
             <Text style={styles_home.buttonLabel}>AddUser</Text>
