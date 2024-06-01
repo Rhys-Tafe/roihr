@@ -1,14 +1,23 @@
+/**
+ * Defines the saveUser constant as a function and uses fetch syntax to fetch API data from Tafe website. Includes validation.
+ 
+ 
+ * @param Defines theid as a global variable.
+ * @returns User screen with loading or user details form and defines form constant.
+ */
 //import styles, react, react native elements including use state, and ROI files.
 //import expo router.
 //Import variable x for id value.
 import { useState, useEffect } from "react";
 import { View, Text, TextInput, Pressable } from "react-native";
-import { styles_home, styles_footer, styles_login } from "../../CSS/styles";
+import { styles_home, styles_footer, styles_login } from "../../Styles/styles";
 import React from "react";
-import { x } from "../staffdirectory";
+//import { x } from "../staffdirectory";
 import { router } from "expo-router";
-
+import { useFonts } from "expo-font";
+import { theid } from "./readUsers";
 var newid = "";
+
 //Define constant User.
 const User = () => {
   // Define constant for User details.
@@ -23,7 +32,40 @@ const User = () => {
   const [state, setState] = useState("");
   const [zip, setZip] = useState("");
   const [country, setCountry] = useState("");
-  newid = String(x);
+
+  const [loaded] = useFonts({
+    "Trebuchet-Bold": require("../../../assets/fonts/Trebuchet MS Bold.ttf"),
+  });
+  if (!loaded) {
+    return null;
+  }
+  const [loaded1] = useFonts({
+    "Trebuchet-MS": require("../../../assets/fonts/Trebuchet MS.ttf"),
+  });
+  if (!loaded1) {
+    return null;
+  }
+
+  let [errors, setErrors] = useState("");
+
+  if (theid === "") {
+    errors = "Id is required";
+    alert(errors);
+    router.push("/screens/staffdirectory");
+    console.log(errors);
+  } else if (theid === " ") {
+    errors = "Id cannot be nothing.";
+    alert(errors);
+    router.push("/screens/staffdirectory");
+    console.log(errors);
+  } else if (theid === "0") {
+    errors = "Id cannot be 0.";
+    alert(errors);
+    router.push("/screens/staffdirectory");
+    console.log(errors);
+  } else {
+    newid = String(theid);
+  }
 
   let url = "https://api.inverellit.net.au/users/read?id=" + newid;
 
@@ -31,7 +73,7 @@ const User = () => {
     .then((res) => res.json())
     .then((data) => setData(data))
     .catch((e) => {
-      console.error(e);
+      console.warn(e);
       return e;
     });
   // Define constant for saveUser details.
@@ -81,65 +123,156 @@ const User = () => {
   // Return view and screens with selection shorthand statement.
   // Will return the selected users details or a loading message will fetching details from server.
   return (
-    <View style={{ justifyContent: "center", alignItems: "center" }}>
+    <View accessible={true}>
       {loading ? (
         <Text>Loading...</Text>
       ) : (
-        <View>
+        <View
+          accessible={true}
+          style={{
+            fontFamily: "Trebuchet-MS",
+            fontSize: 16,
+            color: "white",
+            alignContent: "flex-start",
+            textAlign: "center",
+            padding: 20,
+          }}
+        >
           <TextInput
-            style={styles_login.buttonLabel}
+            type="text"
+            //aria-label={labelText}
+            aria-required="true"
+            style={{
+              fontFamily: "Trebuchet-MS",
+              fontSize: 16,
+              color: "white",
+              alignContent: "flex-start",
+              textAlign: "center",
+            }}
             onChangeText={(id) => setId(id)}
           >
             {data && data.map((data) => <Text key={data.id}>{data.id}</Text>)}
           </TextInput>
           <TextInput
-            style={styles_login.buttonLabel}
+            type="text"
+            //aria-label={labelText}
+            aria-required="true"
+            style={{
+              fontFamily: "Trebuchet-MS",
+              fontSize: 16,
+              color: "white",
+              alignContent: "flex-start",
+              textAlign: "center",
+            }}
             onChangeText={(newName) => setName(newName)}
           >
             {data && data.map((data) => <Text key={data.id}>{data.name}</Text>)}
           </TextInput>
           <TextInput
-            style={styles_login.buttonLabel}
+            type="text"
+            //aria-label={labelText}
+            aria-required="true"
+            style={{
+              fontFamily: "Trebuchet-MS",
+              fontSize: 16,
+              color: "white",
+              alignContent: "flex-start",
+              textAlign: "center",
+            }}
             onChangeText={(phone) => setPhone(phone)}
           >
             {data &&
               data.map((data) => <Text key={data.id}>{data.phone}</Text>)}
           </TextInput>
           <TextInput
-            style={styles_login.buttonLabel}
+            type="text"
+            //aria-label={labelText}
+            aria-required="true"
+            style={{
+              fontFamily: "Trebuchet-MS",
+              fontSize: 16,
+              color: "white",
+              alignContent: "flex-start",
+              textAlign: "center",
+            }}
             onChangeText={(department) => setDepartment(department)}
           >
             {data &&
               data.map((data) => <Text key={data.id}>{data.department}</Text>)}
           </TextInput>
           <TextInput
-            style={styles_login.buttonLabel}
+            type="text"
+            //aria-label={labelText}
+            aria-required="true"
+            style={{
+              fontFamily: "Trebuchet-MS",
+              fontSize: 16,
+              color: "white",
+              alignContent: "flex-start",
+              textAlign: "center",
+            }}
             onChangeText={(street) => setStreet(street)}
           >
             {data &&
               data.map((data) => <Text key={data.id}>{data.street}</Text>)}
           </TextInput>
           <TextInput
-            style={styles_login.buttonLabel}
+            type="text"
+            //aria-label={labelText}
+            aria-required="true"
+            style={{
+              fontFamily: "Trebuchet-MS",
+              fontSize: 16,
+              color: "white",
+              alignContent: "flex-start",
+              textAlign: "center",
+            }}
             onChangeText={(city) => setCity(city)}
           >
             {data && data.map((data) => <Text key={data.id}>{data.city}</Text>)}
           </TextInput>
           <TextInput
-            style={styles_login.buttonLabel}
+            type="text"
+            //aria-label={labelText}
+            aria-required="true"
+            style={{
+              fontFamily: "Trebuchet-MS",
+              fontSize: 16,
+              color: "white",
+              alignContent: "flex-start",
+              textAlign: "center",
+            }}
             onChangeText={(state) => setState(state)}
           >
             {data &&
               data.map((data) => <Text key={data.id}>{data.state}</Text>)}
           </TextInput>
           <TextInput
-            style={styles_login.buttonLabel}
+            type="text"
+            //aria-label={labelText}
+            aria-required="true"
+            style={{
+              fontFamily: "Trebuchet-MS",
+              fontSize: 16,
+              color: "white",
+              alignContent: "flex-start",
+              textAlign: "center",
+            }}
             onChangeText={(zip) => setZip(zip)}
           >
             {data && data.map((data) => <Text key={data.id}>{data.zip}</Text>)}
           </TextInput>
           <TextInput
-            style={styles_login.buttonLabel}
+            type="text"
+            //aria-label={labelText}
+            aria-required="true"
+            style={{
+              fontFamily: "Trebuchet-MS",
+              fontSize: 16,
+              color: "white",
+              alignContent: "flex-start",
+              textAlign: "center",
+            }}
             onChangeText={(country) => setCountry(country)}
           >
             {data &&
@@ -157,15 +290,44 @@ const User = () => {
                 ))} </Text> */}
 
           {/*Footer contains navigation and saveUser calls saveUser function to save details to server. */}
-          <View style={styles_footer.container}>
-            <Pressable style={styles_home.button} onPress={() => saveUser()}>
-              <Text style={styles_home.buttonLabel}>Finish</Text>
+          <View accessible={true} style={styles_footer.container}>
+            <Pressable
+              accessible={true}
+              accessibilityLabel="Finish"
+              accessibilityHint="Navigates to the Staff Directory screen"
+              style={styles_home.button}
+              onPress={() => saveUser()}
+            >
+              <Text
+                style={{
+                  fontFamily: "Trebuchet-MS",
+                  fontSize: 20,
+                  color: "white",
+                  alignContent: "flex-start",
+                  textAlign: "center",
+                }}
+              >
+                Finish
+              </Text>
             </Pressable>
             <Pressable
+              accessible={true}
+              accessibilityLabel="Go back"
+              accessibilityHint="Navigates to the previous screen"
               style={styles_home.button}
-              onPress={() => router.push("/screens/home")}
+              onPress={() => router.push("/screens/staffdirectory")}
             >
-              <Text style={styles_home.buttonLabel}>Back</Text>
+              <Text
+                style={{
+                  fontFamily: "Trebuchet-MS",
+                  fontSize: 20,
+                  color: "white",
+                  alignContent: "flex-start",
+                  textAlign: "center",
+                }}
+              >
+                Back
+              </Text>
             </Pressable>
           </View>
         </View>
@@ -180,4 +342,5 @@ const User = () => {
 //         </>):(<Text>Loading...</Text>))
 // };
 //Export Default User.
+
 export default User;

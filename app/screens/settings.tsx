@@ -1,7 +1,7 @@
 /**  
-* @file editdirectory.tsx.    
+* @file settings.tsx.    
 
-* @description Will load imports fonts. Returns Edit Directory screen constant. Imports User from components readUser.js. 
+* @description Will load imports fonts. Returns Settings screen constant. 
 
 * @version 1.1.0
 
@@ -10,28 +10,38 @@
 */
 
 /**
- * The Edit Directory constant will return the Edit Directory screen.
+ * Returns Settings screen constant.
  
  
- * @param Set the newid as a global variable.
- * @returns Edit Directory screen with navigation functionality and imports User constant.
+ * @param
+ * @returns Returns Settings screen constant dark theme doesn't have functionality.
  */
 //import styles, react, react native elements including use state, and ROI files.
 //import expo router.
-
+import { StyleSheet } from "react-native";
+//import styles from "../Styles/styles.css";
 import { StatusBar } from "expo-status-bar";
-import { styles_home, styles_nav } from "../Styles/styles";
-import React from "react";
+import {
+  styles_home,
+  styles_nav,
+  styles_footer_home,
+  styles_staffdirectory,
+} from "../Styles/styles.js";
 import { router } from "expo-router";
-import { ImageBackground, Text, View, Image, Pressable } from "react-native";
-import User from "./component/readUser";
-
+import React from "react";
+import {
+  ImageBackground,
+  Text,
+  View,
+  Image,
+  Pressable,
+  SafeAreaView,
+} from "react-native";
 const image = require("../../assets/ROI_FILES/bground3.jpg");
 const image_logo = require("../../assets/ROI_FILES/logo_colour.jpg");
 import { useFonts } from "expo-font";
-// Define constant Edit Directory.
-//Return view and background image.
-const EditDirectory = () => {
+// Define constant Home.
+const Settings = () => {
   const [loaded] = useFonts({
     "Trebuchet-Bold": require("../../assets/fonts/Trebuchet MS Bold.ttf"),
   });
@@ -44,6 +54,8 @@ const EditDirectory = () => {
   if (!loaded1) {
     return null;
   }
+
+  //alert("you pressed a button hopeless")
 
   // Returns Navigation.
   return (
@@ -59,7 +71,7 @@ const EditDirectory = () => {
             textAlign: "center",
           }}
         >
-          Edit Directory
+          Settings
         </Text>
 
         <View accessible={true} style={styles_nav.container}>
@@ -198,14 +210,65 @@ const EditDirectory = () => {
             </Text>
           </Pressable>
         </View>
-        {/*Import User from readUser */}
+        <StatusBar style="auto" />
         <View style={styles_home.container}>
-          <User />
+          <Pressable
+            style={styles_home.button}
+            // IF THIS ROUTER.PUSH DOESN'T WORK THEN CHANGE TO ./ THERE WAS A FAULT ON MY END AND IT WASN'T LOADING THE STYLES IF IT WAS ./ THIS SEEMS TO FIX IT
+          >
+            <Text
+              style={{
+                fontFamily: "Trebuchet-MS",
+                fontSize: 20,
+                color: "white",
+                alignContent: "flex-start",
+                textAlign: "center",
+              }}
+            >
+              Dark Theme
+            </Text>
+          </Pressable>
+        </View>
+        <View style={styles_footer_home.container}>
+          <Pressable
+            style={styles_home.button}
+            // IF THIS ROUTER.PUSH DOESN'T WORK THEN CHANGE TO ./ THERE WAS A FAULT ON MY END AND IT WASN'T LOADING THE STYLES IF IT WAS ./ THIS SEEMS TO FIX IT
+            onPress={() => router.push("/")}
+          >
+            <Text
+              style={{
+                fontFamily: "Trebuchet-MS",
+                fontSize: 20,
+                color: "white",
+                alignContent: "flex-start",
+                textAlign: "center",
+              }}
+            >
+              LogOut
+            </Text>
+          </Pressable>
+          <Pressable
+            style={styles_home.button}
+            // IF THIS ROUTER.PUSH DOESN'T WORK THEN CHANGE TO ./ THERE WAS A FAULT ON MY END AND IT WASN'T LOADING THE STYLES IF IT WAS ./ THIS SEEMS TO FIX IT
+            onPress={() => router.push("/")}
+          >
+            <Text
+              style={{
+                fontFamily: "Trebuchet-MS",
+                fontSize: 20,
+                color: "white",
+                alignContent: "flex-start",
+                textAlign: "center",
+              }}
+            >
+              Settings
+            </Text>
+          </Pressable>
         </View>
       </ImageBackground>
-      <StatusBar style="auto" />
     </View>
   );
 };
-// Export Edit Directory.
-export default EditDirectory;
+
+//Export Home.
+export default Settings;

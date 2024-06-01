@@ -13,12 +13,12 @@ const styles_login = StyleSheet.create({
   },
   text: {
     alignContent: "flex-start",
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: "bold",
     textAlign: "center",
     color: "white",
     fontStyle: "italic",
-    //fontFamily:"Trebuchet",
+    fontFamily: "sans-serif",
   },
   image_logo: {
     maxHeight: "100%",
@@ -51,11 +51,13 @@ const styles_home = StyleSheet.create({
   },
   text: {
     alignContent: "flex-start",
-    fontSize: 40,
+    fontSize: 20,
     fontWeight: "bold",
     textAlign: "center",
     color: "white",
+    fontStyle: "italic",
   },
+
   container: {
     flex: 1,
     flexDirection: "column",
@@ -82,28 +84,20 @@ const styles_home = StyleSheet.create({
   },
 });
 
-
-
-
 const styles_nav = StyleSheet.create({
   container: {
-    
-    flexDirection:"row",
-    
+    flexDirection: "row",
   },
 });
 const styles_footer = StyleSheet.create({
   container: {
-    
-    flexDirection:"row",
-    
+    flexDirection: "row",
   },
 });
 const styles_footer_home = StyleSheet.create({
   container: {
-    marginVertical:300,
-    flexDirection:"row",
-    
+    marginVertical: 300,
+    flexDirection: "row",
   },
 });
 
@@ -114,16 +108,15 @@ const styles_staffdirectory = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  
-  itemContainer:{
+
+  itemContainer: {
     borderWidth: 0,
-    width: '100%',
+    width: "100%",
     padding: 5,
   },
   itemImage: {
     //draft: "yes",
     height: 200,
-    
   },
   itemTitle: {
     textAlign: "center",
@@ -142,16 +135,16 @@ const styles_staffdirectory = StyleSheet.create({
     flexDirection: "row",
     backgroundColor: "white",
   },
-  
+
   mainItem: {
-    width:200,
-    height:'auto', 
-    margin:10,
-    color:'white',
-     
-    
-    borderColor: 'white',
-}});
+    width: 200,
+    height: "auto",
+    margin: 10,
+    color: "white",
+
+    borderColor: "white",
+  },
+});
 
 // @FontFace:{
 //  font-family: ultra;
@@ -160,4 +153,12 @@ const styles_staffdirectory = StyleSheet.create({
 // .ultra{
 //   font-family: Zeykfont-Regular.ttf;
 // }
-export { styles_login, styles_home, styles_nav, styles_footer_home, styles_footer, styles_staffdirectory };
+
+export {
+  styles_login,
+  styles_home,
+  styles_nav,
+  styles_footer_home,
+  styles_footer,
+  styles_staffdirectory,
+};

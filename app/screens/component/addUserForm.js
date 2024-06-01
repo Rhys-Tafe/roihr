@@ -1,3 +1,10 @@
+/**
+ * Defines the MyAddForm constant as a function. Includes validation.
+ 
+ 
+ * @param 
+ * @returns MyAddForm component with save and add user functions with user details form and defines form constant.
+ */
 //import styles, react, react native elements including use state, and ROI files.
 //import expo router.
 import {
@@ -14,9 +21,10 @@ import {
   styles_home,
   styles_footer,
   styles_staffdirectory,
-} from "../../CSS/styles";
+} from "../../Styles/styles";
 const image = require("../../../assets/ROI_FILES/bground3.jpg");
 import { useState } from "react";
+import { useFonts } from "expo-font";
 
 //Define MyAddForm as a function.
 const MyAddForm = function (props) {
@@ -30,30 +38,42 @@ const MyAddForm = function (props) {
   const [zip, setZip] = useState("");
   const [country, setCountry] = useState("");
   const [errors, setErrors] = useState({});
+  const [loaded] = useFonts({
+    "Trebuchet-Bold": require("../../../assets/fonts/Trebuchet MS Bold.ttf"),
+  });
+  if (!loaded) {
+    return null;
+  }
+  const [loaded1] = useFonts({
+    "Trebuchet-MS": require("../../../assets/fonts/Trebuchet MS.ttf"),
+  });
+  if (!loaded1) {
+    return null;
+  }
   let userDetails = false;
 
   //Validate user details.
   const validateForm = () => {
     let errors = {};
 
-    if (!id) {
-      errors.id = "Id is required";
-      setErrors(errors);
-      userDetails = false;
-      return Object.keys(errors).length === 0;
-    } else if (id === " ") {
-      errors.id = "Id cannot be nothing.";
-      setErrors(errors);
-      userDetails = false;
-      return Object.keys(errors).length === 0;
-    } else if (id === "0") {
-      errors.id = "Id cannot be 0.";
-      setErrors(errors);
-      userDetails = false;
-      return Object.keys(errors).length === 0;
-    } else {
-      userDetails = true;
-    }
+    // if (!id) {
+    //   errors.id = "Id is required";
+    //   setErrors(errors);
+    //   userDetails = false;
+    //   return Object.keys(errors).length === 0;
+    // } else if (id === " ") {
+    //   errors.id = "Id cannot be nothing.";
+    //   setErrors(errors);
+    //   userDetails = false;
+    //   return Object.keys(errors).length === 0;
+    // } else if (id === "0") {
+    //   errors.id = "Id cannot be 0.";
+    //   setErrors(errors);
+    //   userDetails = false;
+    //   return Object.keys(errors).length === 0;
+    // } else {
+    //   userDetails = true;
+    // }
 
     if (!username) {
       errors.username = "Username is required";
@@ -246,91 +266,199 @@ const MyAddForm = function (props) {
   //Return view image background and a safe area view.
   return (
     <View
+      accessible={true}
       style={{
-        justifyContent: "center",
+        //justifyContent: "center",
         alignItems: "left",
         fontSize: 40,
       }}
     >
       <ImageBackground source={image} style={styles_home.image}>
-        <SafeAreaView style={styles_staffdirectory.container}>
-          <View
+        <SafeAreaView accessible={true} style={styles_home.container}>
+          {/* <TextInput
             style={{
-              justifyContent: "center",
-              alignItems: "left",
-              fontSize: 40,
+              fontFamily: "Trebuchet-MS",
+              fontSize: 13,
+              color: "white",
+              alignContent: "flex-start",
+              textAlign: "center",
             }}
-          >
-            <ImageBackground source={image} style={styles_home.image}>
-              <TextInput
-                placeholder="Enter ID"
-                value={id}
-                onChangeText={(text) => setId(text)}
-              />
-              {errors.id ? <Text>{errors.id}</Text> : null}
-              <TextInput
-                placeholder="Enter Name"
-                value={username}
-                onChangeText={(text) => setName(text)}
-              />
-              {errors.username ? <Text>{errors.username}</Text> : null}
-              <TextInput
-                placeholder="Enter Phone"
-                value={phone}
-                keyboardType={"numeric"}
-                onChangeText={(text) => setPhone(text)}
-              />
-              {errors.phone ? <Text>{errors.phone}</Text> : null}
-              <TextInput
-                placeholder="Enter Department"
-                value={department}
-                onChangeText={(text) => setDepartment(text)}
-              />
-              {errors.department ? <Text>{errors.department}</Text> : null}
-              <TextInput
-                placeholder="Enter Street"
-                value={street}
-                onChangeText={(text) => setStreet(text)}
-              />
-              {errors.street ? <Text>{errors.street}</Text> : null}
-              <TextInput
-                placeholder="Enter City"
-                value={city}
-                onChangeText={(text) => setCity(text)}
-              />
-              {errors.city ? <Text>{errors.city}</Text> : null}
-              <TextInput
-                placeholder="Enter State"
-                value={state}
-                onChangeText={(text) => setState(text)}
-              />
-              {errors.state ? <Text>{errors.state}</Text> : null}
-              <TextInput
-                placeholder="Enter Postcode"
-                value={zip}
-                onChangeText={(text) => setZip(text)}
-              />
-              {errors.zip ? <Text>{errors.zip}</Text> : null}
-              <TextInput
-                placeholder="Country"
-                value={country}
-                onChangeText={(text) => setCountry(text)}
-              />
-              {errors.country ? <Text>{errors.country}</Text> : null}
-            </ImageBackground>
-          </View>
+            placeholder="Enter Id"
+            value={id}
+            onChangeText={(text) => setId(text)}
+          />
+          {errors.id ? <Text>{errors.id}</Text> : null} */}
+          <TextInput
+            type="text"
+            //aria-label={labelText}
+            aria-required="true"
+            style={{
+              fontFamily: "Trebuchet-MS",
+              fontSize: 13,
+              color: "white",
+              alignContent: "flex-start",
+              textAlign: "center",
+            }}
+            placeholder="Enter Name"
+            value={username}
+            onChangeText={(text) => setName(text)}
+          />
+          {errors.username ? <Text>{errors.username}</Text> : null}
+          <TextInput
+            type="text"
+            //aria-label={labelText}
+            aria-required="true"
+            style={{
+              fontFamily: "Trebuchet-MS",
+              fontSize: 13,
+              color: "white",
+              alignContent: "flex-start",
+              textAlign: "center",
+            }}
+            placeholder="Enter Phone"
+            value={phone}
+            keyboardType={"numeric"}
+            onChangeText={(text) => setPhone(text)}
+          />
+          {errors.phone ? <Text>{errors.phone}</Text> : null}
+          <TextInput
+            type="text"
+            //aria-label={labelText}
+            aria-required="true"
+            style={{
+              fontFamily: "Trebuchet-MS",
+              fontSize: 13,
+              color: "white",
+              alignContent: "flex-start",
+              textAlign: "center",
+            }}
+            placeholder="Enter Depart."
+            value={department}
+            onChangeText={(text) => setDepartment(text)}
+          />
+          {errors.department ? <Text>{errors.department}</Text> : null}
+          <TextInput
+            type="text"
+            //aria-label={labelText}
+            aria-required="true"
+            style={{
+              fontFamily: "Trebuchet-MS",
+              fontSize: 13,
+              color: "white",
+              alignContent: "flex-start",
+              textAlign: "center",
+            }}
+            placeholder="Enter Street"
+            value={street}
+            onChangeText={(text) => setStreet(text)}
+          />
+          {errors.street ? <Text>{errors.street}</Text> : null}
+          <TextInput
+            type="text"
+            //aria-label={labelText}
+            aria-required="true"
+            style={{
+              fontFamily: "Trebuchet-MS",
+              fontSize: 13,
+              color: "white",
+              alignContent: "flex-start",
+              textAlign: "center",
+            }}
+            placeholder="Enter City"
+            value={city}
+            onChangeText={(text) => setCity(text)}
+          />
+          {errors.city ? <Text>{errors.city}</Text> : null}
+          <TextInput
+            type="text"
+            //aria-label={labelText}
+            aria-required="true"
+            style={{
+              fontFamily: "Trebuchet-MS",
+              fontSize: 13,
+              color: "white",
+              alignContent: "flex-start",
+              textAlign: "center",
+            }}
+            placeholder="Enter State"
+            value={state}
+            onChangeText={(text) => setState(text)}
+          />
+          {errors.state ? <Text>{errors.state}</Text> : null}
+          <TextInput
+            type="text"
+            //aria-label={labelText}
+            aria-required="true"
+            style={{
+              fontFamily: "Trebuchet-MS",
+              fontSize: 13,
+              color: "white",
+              alignContent: "flex-start",
+              textAlign: "center",
+            }}
+            placeholder="Enter Postcode"
+            value={zip}
+            onChangeText={(text) => setZip(text)}
+          />
+          {errors.zip ? <Text>{errors.zip}</Text> : null}
+          <TextInput
+            type="text"
+            //aria-label={labelText}
+            aria-required="true"
+            style={{
+              fontFamily: "Trebuchet-MS",
+              fontSize: 13,
+              color: "white",
+              alignContent: "flex-start",
+              textAlign: "center",
+            }}
+            placeholder="Enter Country"
+            value={country}
+            onChangeText={(text) => setCountry(text)}
+          />
+          {errors.country ? <Text>{errors.country}</Text> : null}
+          {/*Footer contains saveUser function and home navigation. */}
         </SafeAreaView>
-        {/*Footer contains saveUser function and home navigation. */}
-        <View style={styles_footer.container}>
-          <Pressable style={styles_home.button} onPress={() => addUser()}>
-            <Text style={styles_home.buttonLabel}>AddUser</Text>
+
+        <View accessible={true} style={styles_footer.container}>
+          <Pressable
+            accessible={true}
+            accessibilityLabel="Add User"
+            accessibilityHint="Navigates to the Staff Directory screen"
+            style={styles_home.button}
+            onPress={() => addUser()}
+          >
+            <Text
+              style={{
+                fontFamily: "Trebuchet-MS",
+                fontSize: 20,
+                color: "white",
+                alignContent: "flex-start",
+                textAlign: "center",
+              }}
+            >
+              AddUser
+            </Text>
           </Pressable>
 
           <Pressable
+            accessible={true}
+            accessibilityLabel="Go back"
+            accessibilityHint="Navigates to the previous screen"
             style={styles_home.button}
-            onPress={() => router.push("/screens/home")}
+            onPress={() => router.push("/screens/login")}
           >
-            <Text style={styles_home.buttonLabel}>Back</Text>
+            <Text
+              style={{
+                fontFamily: "Trebuchet-MS",
+                fontSize: 20,
+                color: "white",
+                alignContent: "flex-start",
+                textAlign: "center",
+              }}
+            >
+              Back
+            </Text>
           </Pressable>
         </View>
       </ImageBackground>

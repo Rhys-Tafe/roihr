@@ -1,14 +1,26 @@
+/**  
+* @file staffdirectory.tsx.    
+
+* @description Will load imports fonts. Returns Staff Directory screen constant as a function. Imports Read All from components readUsers.js. 
+
+* @version 1.1.0
+
+* @author Rhys Lahy
+
+*/
+
+/**
+ * The Staff Directory constant will return the Staff Directory screen.
+ 
+ 
+ * @param
+ * @returns Staff Directory screen with navigation functionality and imports ReadAll.
+ */
 //import styles, react, react native elements including use state, and ROI files.
 //import expo router.
 
 import { StatusBar } from "expo-status-bar";
-import {
-  styles_home,
-  styles_nav,
-  styles_footer,
-  styles_staffdirectory,
-  styles_login,
-} from "../CSS/styles";
+import { styles_home, styles_nav, styles_footer } from "../Styles/styles";
 import React from "react";
 import { router } from "expo-router";
 import {
@@ -19,96 +31,247 @@ import {
   Pressable,
   TextInput,
 } from "react-native";
-//import {User} from './component/staff';
-//import newApp from './component/newApp';
 import ReadAll from "./component/readUsers";
 const image = require("../../assets/ROI_FILES/bground3.jpg");
 const image_logo = require("../../assets/ROI_FILES/logo_colour.jpg");
 import { useState } from "react";
-import Users from "./component/newApp";
+import { useFonts } from "expo-font";
+import { theid } from "./component/readUsers";
 // Define variable x as global.
 // Define constant Staff Directory.
-var x = "";
 
-const StaffDirectory = () => {
+const StaffDirectory = function (props) {
   var [id, setId] = useState("");
-  function HandleId() {
-    x = id;
-    router.push("../screens/editdirectory");
-    alert(x);
+
+  const [loaded] = useFonts({
+    "Trebuchet-Bold": require("../../assets/fonts/Trebuchet MS Bold.ttf"),
+  });
+  if (!loaded) {
+    return null;
   }
+  const [loaded1] = useFonts({
+    "Trebuchet-MS": require("../../assets/fonts/Trebuchet MS.ttf"),
+  });
+  if (!loaded1) {
+    return null;
+  }
+
   // Returns Navigation.
   return (
-    <View style={styles_home.container}>
+    <View accessible={true} style={styles_home.container}>
       <ImageBackground source={image} style={styles_home.image}>
         <Image source={image_logo} style={styles_home.image_logo}></Image>
-        <Text style={styles_home.text}>Staff Directory</Text>
+        <Text
+          style={{
+            fontFamily: "Trebuchet-Bold",
+            fontSize: 30,
+            color: "white",
+            alignContent: "flex-start",
+            textAlign: "center",
+          }}
+        >
+          Staff Directory
+        </Text>
 
-        <View style={styles_nav.container}>
+        <View accessible={true} style={styles_nav.container}>
           <Pressable
+            accessible={true}
+            accessibilityLabel="Go to Home"
+            accessibilityHint="Navigates to the Home screen"
             style={styles_home.button}
             onPress={() => router.push("/screens/home")}
           >
-            <Text style={styles_home.buttonLabel}>Home</Text>
+            <Text
+              accessible={true}
+              accessibilityLabel="Go to Home"
+              accessibilityHint="Navigates to the Home screen"
+              style={{
+                fontFamily: "Trebuchet-MS",
+                fontSize: 20,
+                color: "white",
+                alignContent: "flex-start",
+                textAlign: "center",
+              }}
+            >
+              Home
+            </Text>
           </Pressable>
-
           <Pressable
+            accessible={true}
+            accessibilityLabel="Go to Staff Directory"
+            accessibilityHint="Navigates to the Staff Directory screen"
+            style={styles_home.button}
+            onPress={() => router.push("/screens/staffdirectory")}
+          >
+            <Text
+              accessible={true}
+              accessibilityLabel="Go to Staff Directory"
+              accessibilityHint="Navigates to the Staff Directory screen"
+              style={{
+                fontFamily: "Trebuchet-MS",
+                fontSize: 20,
+                color: "white",
+                alignContent: "flex-start",
+                textAlign: "center",
+              }}
+            >
+              Staff Directory
+            </Text>
+          </Pressable>
+          <Pressable
+            accessible={true}
+            accessibilityLabel="Go to HR"
+            accessibilityHint="Navigates to the HR screen"
             style={styles_home.button}
             onPress={() => alert("You Pressed a Button for HR.")}
           >
-            <Text style={styles_home.buttonLabel}>HR</Text>
+            <Text
+              accessible={true}
+              accessibilityLabel="Go to HR"
+              accessibilityHint="Navigates to the HR screen"
+              style={{
+                fontFamily: "Trebuchet-MS",
+                fontSize: 20,
+                color: "white",
+                alignContent: "flex-start",
+                textAlign: "center",
+              }}
+            >
+              HR
+            </Text>
           </Pressable>
+        </View>
+        <View accessible={true} style={styles_nav.container}>
           <Pressable
+            accessible={true}
+            accessibilityLabel="Go to Documents"
+            accessibilityHint="Navigates to the Documents screen"
             style={styles_home.button}
             onPress={() => alert("You Pressed a Button for Documents.")}
           >
-            <Text style={styles_home.buttonLabel}>Documents</Text>
+            <Text
+              accessible={true}
+              accessibilityLabel="Go to Documents"
+              accessibilityHint="Navigates to the Documents screen"
+              style={{
+                fontFamily: "Trebuchet-MS",
+                fontSize: 20,
+                color: "white",
+                alignContent: "flex-start",
+                textAlign: "center",
+              }}
+            >
+              Documents
+            </Text>
           </Pressable>
-        </View>
-        <View style={styles_nav.container}>
           <Pressable
+            accessible={true}
+            accessibilityLabel="Go to Payroll"
+            accessibilityHint="Navigates to the Payroll screen"
             style={styles_home.button}
             onPress={() => alert("You Pressed a Button for Payroll.")}
           >
-            <Text style={styles_home.buttonLabel}>Payroll</Text>
+            <Text
+              accessible={true}
+              accessibilityLabel="Go to Payroll"
+              accessibilityHint="Navigates to the Payroll screen"
+              style={{
+                fontFamily: "Trebuchet-MS",
+                fontSize: 20,
+                color: "white",
+                alignContent: "flex-start",
+                textAlign: "center",
+              }}
+            >
+              Payroll
+            </Text>
           </Pressable>
           <Pressable
+            accessible={true}
+            accessibilityLabel="Go to Comms"
+            accessibilityHint="Navigates to the Comms screen"
             style={styles_home.button}
             onPress={() => alert("You Pressed a Button for Comms.")}
           >
-            <Text style={styles_home.buttonLabel}>Comms</Text>
+            <Text
+              accessible={true}
+              accessibilityLabel="Go to Comms"
+              accessibilityHint="Navigates to the Comms screen"
+              style={{
+                fontFamily: "Trebuchet-MS",
+                fontSize: 20,
+                color: "white",
+                alignContent: "flex-start",
+                textAlign: "center",
+              }}
+            >
+              Comms
+            </Text>
           </Pressable>
         </View>
-        <View>
+        {/* <View>
           <TextInput
-            style={styles_login.buttonLabel}
-            placeholder={"User ID"}
+            style={{
+              fontFamily: "Trebuchet-MS",
+              fontSize: 20,
+              textDecorationColor: "white",
+              alignContent: "flex-start",
+              textAlign: "center",
+            }}
+            placeholder={"UserID"}
             value={id}
             onChangeText={(text) => setId(text)}
-          ></TextInput>
-          <Text>{id}</Text>
-        </View>
-        <View style={styles_home.container}>
+          />
+        </View> */}
+        <View accessible={true} style={styles_home.container}>
           <ReadAll />
         </View>
 
-        <View style={styles_footer.container}>
+        <View accessible={true} style={styles_footer.container}>
           <Pressable
+            accessible={true}
+            accessibilityLabel="Go to add user screen"
+            accessibilityHint="Navigates to the previous screen"
             style={styles_home.button}
             onPress={() => router.push("/screens/addUser")}
           >
-            <Text style={styles_home.buttonLabel}>Add</Text>
-          </Pressable>
-
-          <Pressable style={styles_home.button} onPress={HandleId}>
-            <Text style={styles_home.buttonLabel}>Edit</Text>
+            <Text
+              accessible={true}
+              accessibilityLabel="Go to add user screen"
+              accessibilityHint="Navigates to the previous screen"
+              style={{
+                fontFamily: "Trebuchet-MS",
+                fontSize: 20,
+                color: "white",
+                alignContent: "flex-start",
+                textAlign: "center",
+              }}
+            >
+              Add
+            </Text>
           </Pressable>
 
           <Pressable
+            accessible={true}
+            accessibilityLabel="Back"
+            accessibilityHint="Navigates to the previous screen"
             style={styles_home.button}
             onPress={() => router.push("/screens/home")}
           >
-            <Text style={styles_home.buttonLabel}>Back</Text>
+            <Text
+              accessible={true}
+              accessibilityLabel="Back"
+              accessibilityHint="Navigates to the previous screen"
+              style={{
+                fontFamily: "Trebuchet-MS",
+                fontSize: 20,
+                color: "white",
+                alignContent: "flex-start",
+                textAlign: "center",
+              }}
+            >
+              Back
+            </Text>
           </Pressable>
         </View>
       </ImageBackground>
@@ -117,5 +280,5 @@ const StaffDirectory = () => {
   );
 };
 //Export Staff Directory and x variable used for id to select record to edit.
-export { x };
+
 export default StaffDirectory;

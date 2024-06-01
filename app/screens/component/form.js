@@ -1,3 +1,10 @@
+/**
+ * Defines the MyForm constant as a function. Includes validation.
+ 
+ 
+ * @param 
+ * @returns MyForm component with save and add user functions with user details form and defines form constant.
+ */
 //import styles, react, react native elements including use state, and ROI files.
 //import expo router.
 import {
@@ -5,11 +12,9 @@ import {
   View,
   TextInput,
   Pressable,
-  Button,
   SafeAreaView,
   ImageBackground,
-  KeyboardAvoidingView,
-  Platform,
+  //KeyboardAvoidingView,
 } from "react-native";
 import * as React from "react";
 import { router } from "expo-router";
@@ -17,10 +22,11 @@ import {
   styles_home,
   styles_footer,
   styles_staffdirectory,
-} from "../../CSS/styles";
+  styles_login,
+} from "../../Styles/styles";
 const image = require("../../../assets/ROI_FILES/bground3.jpg");
 import { useState } from "react";
-
+import { useFonts } from "expo-font";
 //Define Form as a function.
 
 const MyForm = function (props) {
@@ -34,30 +40,42 @@ const MyForm = function (props) {
   const [zip, setZip] = useState("");
   const [country, setCountry] = useState("");
   const [errors, setErrors] = useState({});
+  const [loaded] = useFonts({
+    "Trebuchet-Bold": require("../../../assets/fonts/Trebuchet MS Bold.ttf"),
+  });
+  if (!loaded) {
+    return null;
+  }
+  const [loaded1] = useFonts({
+    "Trebuchet-MS": require("../../../assets/fonts/Trebuchet MS.ttf"),
+  });
+  if (!loaded1) {
+    return null;
+  }
   //Validate user details.
   let userDetails = false;
 
   const validateForm = () => {
     let errors = {};
 
-    if (!id) {
-      errors.id = "Id is required";
-      setErrors(errors);
-      userDetails = false;
-      return Object.keys(errors).length === 0;
-    } else if (id === " ") {
-      errors.id = "Id cannot be nothing.";
-      setErrors(errors);
-      userDetails = false;
-      return Object.keys(errors).length === 0;
-    } else if (id === "0") {
-      errors.id = "Id cannot be 0.";
-      setErrors(errors);
-      userDetails = false;
-      return Object.keys(errors).length === 0;
-    } else {
-      userDetails = true;
-    }
+    // if (!id) {
+    //   errors.id = "Id is required";
+    //   setErrors(errors);
+    //   userDetails = false;
+    //   return Object.keys(errors).length === 0;
+    // } else if (id === " ") {
+    //   errors.id = "Id cannot be nothing.";
+    //   setErrors(errors);
+    //   userDetails = false;
+    //   return Object.keys(errors).length === 0;
+    // } else if (id === "0") {
+    //   errors.id = "Id cannot be 0.";
+    //   setErrors(errors);
+    //   userDetails = false;
+    //   return Object.keys(errors).length === 0;
+    // } else {
+    //   userDetails = true;
+    // }
 
     if (!username) {
       errors.username = "Username is required";
@@ -250,83 +268,213 @@ const MyForm = function (props) {
   return (
     <View
       style={{
-        justifyContent: "center",
+        //justifyContent: "center",
         alignItems: "left",
         fontSize: 40,
       }}
     >
       <ImageBackground source={image} style={styles_home.image}>
-        <SafeAreaView style={styles_staffdirectory.container}>
-          <ImageBackground source={image} style={styles_home.image}>
-            <TextInput
-              placeholder="Enter ID"
-              value={id}
-              onChangeText={(text) => setId(text)}
-            />
-            {errors.id ? <Text>{errors.id}</Text> : null}
-            <TextInput
-              placeholder="Enter Name"
-              value={username}
-              onChangeText={(text) => setName(text)}
-            />
-            {errors.username ? <Text>{errors.username}</Text> : null}
-            <TextInput
-              placeholder="Enter Phone"
-              value={phone}
-              keyboardType={"numeric"}
-              onChangeText={(text) => setPhone(text)}
-            />
-            {errors.phone ? <Text>{errors.phone}</Text> : null}
-            <TextInput
-              placeholder="Enter Department"
-              value={department}
-              onChangeText={(text) => setDepartment(text)}
-            />
-            {errors.department ? <Text>{errors.department}</Text> : null}
-            <TextInput
-              placeholder="Enter Street"
-              value={street}
-              onChangeText={(text) => setStreet(text)}
-            />
-            {errors.street ? <Text>{errors.street}</Text> : null}
-            <TextInput
-              placeholder="Enter City"
-              value={city}
-              onChangeText={(text) => setCity(text)}
-            />
-            {errors.city ? <Text>{errors.city}</Text> : null}
-            <TextInput
-              placeholder="Enter State"
-              value={state}
-              onChangeText={(text) => setState(text)}
-            />
-            {errors.state ? <Text>{errors.state}</Text> : null}
-            <TextInput
-              placeholder="Enter Postcode"
-              value={zip}
-              onChangeText={(text) => setZip(text)}
-            />
-            {errors.zip ? <Text>{errors.zip}</Text> : null}
-            <TextInput
-              placeholder="Country"
-              value={country}
-              onChangeText={(text) => setCountry(text)}
-            />
-            {errors.country ? <Text>{errors.country}</Text> : null}
-            {/*Footer contains saveUser function and home navigation. */}
-          </ImageBackground>
+        <SafeAreaView style={styles_home.container}>
+          {/* <TextInput
+            style={{
+              fontFamily: "Trebuchet-MS",
+              fontSize: 13,
+              color: "white",
+              alignContent: "flex-start",
+              textAlign: "center",
+              margin: 5,
+            }}
+            placeholder="Enter Id"
+            value={id}
+            onChangeText={(text) => setId(text)}
+          />
+          {errors.id ? <Text>{errors.id}</Text> : null} */}
+          <TextInput
+            type="text"
+            //aria-label={labelText}
+            aria-required="true"
+            style={{
+              fontFamily: "Trebuchet-MS",
+              fontSize: 13,
+              color: "white",
+              alignContent: "flex-start",
+              textAlign: "center",
+              margin: 5,
+            }}
+            htmlFor="namedInput"
+            placeholder="Enter Name"
+            value={username}
+            onChangeText={(text) => setName(text)}
+          />
+          {errors.username ? <Text>{errors.username}</Text> : null}
+          <TextInput
+            type="text"
+            //aria-label={labelText}
+            aria-required="true"
+            style={{
+              fontFamily: "Trebuchet-MS",
+              fontSize: 13,
+              color: "white",
+              alignContent: "flex-start",
+              textAlign: "center",
+              margin: 5,
+            }}
+            placeholder="Enter Phone"
+            value={phone}
+            keyboardType={"numeric"}
+            onChangeText={(text) => setPhone(text)}
+          />
+          {errors.phone ? <Text>{errors.phone}</Text> : null}
+          <TextInput
+            type="text"
+            //aria-label={labelText}
+            aria-required="true"
+            style={{
+              fontFamily: "Trebuchet-MS",
+              fontSize: 13,
+              color: "white",
+              alignContent: "flex-start",
+              textAlign: "center",
+              margin: 5,
+            }}
+            placeholder="Enter Depart."
+            value={department}
+            onChangeText={(text) => setDepartment(text)}
+          />
+          {errors.department ? <Text>{errors.department}</Text> : null}
+          <TextInput
+            type="text"
+            //aria-label={labelText}
+            aria-required="true"
+            style={{
+              fontFamily: "Trebuchet-MS",
+              fontSize: 13,
+              color: "white",
+              alignContent: "flex-start",
+              textAlign: "center",
+              margin: 5,
+            }}
+            placeholder="Enter Street"
+            value={street}
+            onChangeText={(text) => setStreet(text)}
+          />
+          {errors.street ? <Text>{errors.street}</Text> : null}
+          <TextInput
+            type="text"
+            //aria-label={labelText}
+            aria-required="true"
+            style={{
+              fontFamily: "Trebuchet-MS",
+              fontSize: 13,
+              color: "white",
+              alignContent: "flex-start",
+              textAlign: "center",
+              margin: 5,
+            }}
+            placeholder="Enter City"
+            value={city}
+            onChangeText={(text) => setCity(text)}
+          />
+          {errors.city ? <Text>{errors.city}</Text> : null}
+          <TextInput
+            type="text"
+            //aria-label={labelText}
+            aria-required="true"
+            style={{
+              fontFamily: "Trebuchet-MS",
+              fontSize: 13,
+              color: "white",
+              alignContent: "flex-start",
+              textAlign: "center",
+              margin: 5,
+            }}
+            placeholder="Enter State"
+            value={state}
+            onChangeText={(text) => setState(text)}
+          />
+          {errors.state ? <Text>{errors.state}</Text> : null}
+          <TextInput
+            type="text"
+            //aria-label={labelText}
+            aria-required="true"
+            style={{
+              fontFamily: "Trebuchet-MS",
+              fontSize: 13,
+              color: "white",
+              alignContent: "flex-start",
+              textAlign: "center",
+              margin: 5,
+            }}
+            placeholder="Enter Postcode"
+            value={zip}
+            onChangeText={(text) => setZip(text)}
+          />
+          {errors.zip ? <Text>{errors.zip}</Text> : null}
+          <TextInput
+            type="text"
+            //aria-label={labelText}
+            aria-required="true"
+            style={{
+              fontFamily: "Trebuchet-MS",
+              fontSize: 13,
+              color: "white",
+              alignContent: "flex-start",
+              textAlign: "center",
+              margin: 5,
+            }}
+            placeholder="Enter Country"
+            value={country}
+            onChangeText={(text) => setCountry(text)}
+          />
+          {errors.country ? <Text>{errors.country}</Text> : null}
+          {/*Footer contains saveUser function and home navigation. */}
         </SafeAreaView>
 
         <View style={styles_footer.container}>
-          <Pressable style={styles_home.button} onPress={() => addUser()}>
-            <Text style={styles_home.buttonLabel}>AddUser</Text>
+          <Pressable
+            accessible={true}
+            accessibilityLabel="Add User"
+            accessibilityHint="Navigates to the previous screen"
+            style={styles_home.button}
+            onPress={() => addUser()}
+          >
+            <Text
+              accessible={true}
+              accessibilityLabel="Add User"
+              accessibilityHint="Navigates to the previous screen"
+              style={{
+                fontFamily: "Trebuchet-MS",
+                fontSize: 20,
+                color: "white",
+                alignContent: "flex-start",
+                textAlign: "center",
+              }}
+            >
+              AddUser
+            </Text>
           </Pressable>
 
           <Pressable
+            accessible={true}
+            accessibilityLabel="Go back"
+            accessibilityHint="Navigates to the previous screen"
             style={styles_home.button}
             onPress={() => router.push("/screens/login")}
           >
-            <Text style={styles_home.buttonLabel}>Back</Text>
+            <Text
+              accessible={true}
+              accessibilityLabel="Go back"
+              accessibilityHint="Navigates to the previous screen"
+              style={{
+                fontFamily: "Trebuchet-MS",
+                fontSize: 20,
+                color: "white",
+                alignContent: "flex-start",
+                textAlign: "center",
+              }}
+            >
+              Back
+            </Text>
           </Pressable>
         </View>
       </ImageBackground>
